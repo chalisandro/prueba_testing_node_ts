@@ -18,7 +18,10 @@ export function getUserByid( id: number,callback: (err?: string, user?: User) =>
         return user.id === id;
     })
     if(!user){
-        return callback(`Usuario no encontrado con el id: ${id}`);
+        setTimeout(() => {
+            return callback(`Usuario no encontrado con el id: ${id}`);
+        }, 2500)
+        return
     }
     return callback(undefined, user);
 }
