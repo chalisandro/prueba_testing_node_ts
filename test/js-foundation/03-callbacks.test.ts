@@ -12,6 +12,20 @@ import { getUserByid } from "../../src/js-foundation/03-callbacks";
             expect(user).toBeUndefined();
             done();
         })
-
+    })
+    test(`getUserByid deberia devolver el id: y el name: `, (done) => {
+        // 1. Arramge
+        const id = 1;
+        // 2. act
+        
+        // 3. assert
+        getUserByid(id, (err, user) => {
+            expect(err).toBeUndefined();
+            expect(user).toEqual({
+                id: 1,
+                name: 'Alisandro'
+            })
+            done();
+        })
     })
  })

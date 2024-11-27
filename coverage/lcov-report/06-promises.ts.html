@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for 03-callbacks.ts</title>
+    <title>Code coverage report for 06-promises.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> 03-callbacks.ts</h1>
+        <h1><a href="index.html">All files</a> 06-promises.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -86,18 +86,7 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -107,43 +96,42 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">interface User{
-    id: number;
-    name: string;
-}
-const users: User[] = [
-    {
-        id: 1,
-        name: 'Alisandro'
-    },
-    {
-        id: 2,
-        name: 'Dexali'
-    }
-]
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { httpClientPlugin as http } from "../plugins/http-client";
 &nbsp;
-export function getUserByid( id: number,callback: (err?: string, user?: User) =&gt; void) {
-    const user = users.find(function (user) {
-        return user.id === id;
-    })
-    if(!user){
-        setTimeout(() =&gt; {
-            return callback(`Usuario no encontrado con el id: ${id}`);
-        }, 2500)
-        return
-    }
-    return callback(undefined, user);
+interface Pokemon {
+    name: string;
+    id: number;
 }
+&nbsp;
+export const getPokemonById = (id: number) =&gt; {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+&nbsp;
+    return fetch(url)
+        .then((resp) =&gt; {
+            if (!resp.ok) {
+                throw new Error('Pokemon no existe'); // Lanzar error si el status no es OK (ej. 404)
+            }
+            return resp.json(); // Parsear la respuesta si el status es OK
+        })
+        .then((pokemon: Pokemon) =&gt; pokemon.name) // Devolver el nombre del Pokémon
+        .catch((error) =&gt; {
+            // Eliminamos el console.error, solo relanzamos el error
+            throw error = new Error (`Pokemon no encontrado con el id ${id}`)
+        });
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
