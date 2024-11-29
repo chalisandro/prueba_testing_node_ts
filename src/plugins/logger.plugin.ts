@@ -3,7 +3,6 @@ const { combine, timestamp, json } = format;
 
 export const logger = winston.createLogger({
   level: 'info',
-  
   format: combine(
       timestamp(),
       json()
